@@ -20,7 +20,24 @@ npm run preview   # xem bản build (có PWA) tại http://localhost:4173
 npm run icons     # tạo lại icon từ public/logo.svg
 ```
 
-Muốn cài lên điện thoại, cần đưa thư mục `dist/` lên hosting có HTTPS (Vercel, Netlify, GitHub Pages…).
+Muốn cài lên điện thoại, cần đưa lên hosting có HTTPS, ví dụ Cloudflare (bên dưới).
+
+## Deploy lên Cloudflare
+
+Repo đã có sẵn `wrangler.jsonc`, `.node-version` (Node 22) và `public/_headers` (cache cho service worker).
+
+**Cách 1 – Workers (khuyên dùng), tự deploy mỗi lần push:**
+Cloudflare Dashboard → Workers & Pages → Create → Import a repository → chọn repo này.
+
+| Mục | Giá trị |
+|---|---|
+| Project name | `daylist` (trùng `name` trong `wrangler.jsonc`) |
+| Build command | `npm run build` |
+| Deploy command | `npx wrangler deploy` |
+
+**Cách 2 – Pages:** Create → Pages → Connect to Git, chọn preset **Vite** hoặc điền tay: build command `npm run build`, output directory `dist`.
+
+**Deploy từ máy:** `npx wrangler login` một lần, sau đó `npm run deploy`.
 
 ## Cấu trúc
 

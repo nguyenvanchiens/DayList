@@ -1,0 +1,17 @@
+# Cloudflare (Workers static assets & Pages) đọc file này để đặt header cache.
+# Service worker, manifest và trang chính không được cache cứng, để bản cập nhật tới người dùng ngay.
+/sw.js
+  Cache-Control: no-cache
+/registerSW.js
+  Cache-Control: no-cache
+/manifest.webmanifest
+  Cache-Control: no-cache
+  Content-Type: application/manifest+json
+/
+  Cache-Control: no-cache
+/index.html
+  Cache-Control: no-cache
+
+# File trong /assets có hash trong tên nên cache vĩnh viễn được
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
